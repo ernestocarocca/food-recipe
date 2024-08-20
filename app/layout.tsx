@@ -1,10 +1,12 @@
 
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "./SeassonProvider";
 import { getServerSession } from "next-auth";
 import { AuthProvider } from "./AuthContext";
+import LogoutButton from "@/components/logoutButton";
 
 
 
@@ -25,6 +27,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main>
+          <LogoutButton />
      <AuthProvider>
         {children}
       </AuthProvider>

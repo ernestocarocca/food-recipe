@@ -1,6 +1,6 @@
 // AuthContext.tsx
 'use client';
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "./firebase.config";
 
@@ -83,4 +83,4 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     );
 };
 
-export { AuthContext, AuthProvider };
+export { AuthContext, AuthProvider, signOut };
