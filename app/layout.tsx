@@ -28,10 +28,11 @@ export default async function RootLayout({
       <body className={inter.className}>
         <main>
         
-     <AuthProvider>
+ 
             <div className="fixed top-2 right-2 z-50">
-            <LogoutButton children={undefined} />
+            <LogoutButton children={undefined}  />
             </div>
+          <AuthProvider>
         {children}
       </AuthProvider>
         </main>

@@ -1,10 +1,16 @@
 'use client';
 import { AuthContext } from '@/app/AuthContext';
-import { useContext } from 'react';
+import { useRouter } from 'next/navigation';
+import { useContext, useEffect } from 'react';
 
 
 const logoutButton = ({ children }: { children: React.ReactNode }) => {
+    const router = useRouter();
     const { signOut } = useContext(AuthContext);
+    useEffect(() => {
+
+        
+    }, [router]);
 
     return (
         <div>
