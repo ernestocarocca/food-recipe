@@ -1,6 +1,5 @@
 "use client";
-import SignupFormDemo from '@/components/example/signup-form-demo'
-import MobileNavbar from '@/components/mobile-menu';
+
 
 import { useState } from 'react';
 
