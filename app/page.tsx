@@ -57,7 +57,7 @@ export default function Home() {
   <div className="flex items-center">
   <div className="flex flex-col items-center">
 
-    <button onClick={() => signOut()}> </button>
+   
    
   </div>
         <TypewriterEffectSmoothDemo />

@@ -3,7 +3,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "./firebase.config";
-
+import { useRouter } from "next/navigation";
 
 interface User {
     uid: string | null;
@@ -51,6 +51,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                     displayName: null,
                     photoURL: null,
                 });
+
             }
             setLoading(false);
         });
@@ -65,10 +66,12 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
             console.error('Error signing in:', error);
         }
     };
-
-    const signOut = async () => {
+    const router = useRouter();
+    const signOutUser = async () => {
+      
         try {
             await auth.signOut();
+            router.push('/');
         } catch (error) {
             console.error('Error signing out:', error);
         }
@@ -76,7 +79,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
     return (
         <AuthContext.Provider
-            value={{ user, loading, signInWithEmailAndPassword, signOut }}
+            value={{ user, loading, signInWithEmailAndPassword, signOut: signOutUser }}
         >
             {children}
         </AuthContext.Provider>
