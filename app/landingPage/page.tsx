@@ -2,11 +2,11 @@ import CanvasRevealEffectDemo from '@/components/example/canvas-reveal-effect-de
 import React from 'react'
 
 const LandingPage = () => {
-  return (
-    <div>
-          <CanvasRevealEffectDemo />
-    </div>
-  )
+    return (
+        <div>
+            <CanvasRevealEffectDemo />
+        </div>
+    )
 }
 
 export default LandingPage

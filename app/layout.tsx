@@ -3,8 +3,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SessionProvider from "./SeassonProvider";
-import { getServerSession } from "next-auth";
+import React from "react";
 import { AuthProvider } from "./AuthContext";
 import LogoutButton from "@/components/logoutButton";
 
@@ -18,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
+  
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -27,8 +27,11 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main>
-          <LogoutButton />
+        
      <AuthProvider>
+            <div className="fixed top-2 right-2 z-50">
+            <LogoutButton children={undefined} />
+            </div>
         {children}
       </AuthProvider>
         </main>

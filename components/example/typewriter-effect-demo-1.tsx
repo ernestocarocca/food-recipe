@@ -7,7 +7,10 @@ export default function TypewriterEffectSmoothDemo() {
   const router = useRouter();
   const handleRoute = () => {
 
-    router.push("/pages/signin");
+    router.push("/login");
+  }
+  const joinNow = () => {
+    router.push("/signup");
   }
 
 
@@ -36,7 +39,10 @@ export default function TypewriterEffectSmoothDemo() {
       </p>
       <TypewriterEffectSmooth words={words} />
       <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 space-x-0 md:space-x-4">
-        <button className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
+        <button onClick={()=>{
+          console.log("clicked")
+          joinNow()
+        }} className="w-40 h-10 rounded-xl bg-black border dark:border-white border-transparent text-white text-sm">
           Join now
         </button>
         <button onClick={() => {

@@ -1,20 +1,17 @@
-'use client'
+'use client';
 import { AuthContext } from '@/app/AuthContext';
-import { signOut } from 'firebase/auth';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 
-const LogoutButton: React.FC = () => {
-    const { signOut } = useContext(AuthContext)
-    const handleLogout = () => {
-    signOut();
-    };
+const logoutButton = ({ children }: { children: React.ReactNode }) => {
+    const { signOut } = useContext(AuthContext);
 
     return (
-        <button onClick={handleLogout} className="logout-button">
-            Logout
-        </button>
+        <div>
+          
+            <button onClick={signOut}>Logout</button>
+        </div>
     );
 };
 
-export default LogoutButton;
+export default logoutButton;
