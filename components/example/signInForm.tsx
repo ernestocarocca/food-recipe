@@ -9,8 +9,7 @@ import {
   IconBrandGoogle,
   IconBrandOnlyfans,
 } from "@tabler/icons-react";
-import { Session } from "inspector";
-import { SessionProvider } from 'next-auth/react'
+
 import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "@/app/firebase.config";
@@ -18,7 +17,7 @@ import { auth } from "@/app/firebase.config";
 
 
 
-export default function SignupFormDemo() {
+export default function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
