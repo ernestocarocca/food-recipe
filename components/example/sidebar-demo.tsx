@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { BackgroundGradientAnimation } from "../ui/background-gradient-animation";
+import { ChartResult } from "../chartsResult";
 
 export default function SidebarDemo() {
   const links = [
@@ -80,7 +81,7 @@ export default function SidebarDemo() {
           </div>
         </SidebarBody>
       </Sidebar>
-      <Dashboard />
+  
     </div>
   );
 }

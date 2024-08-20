@@ -1,3 +1,6 @@
+const { color } = require("framer-motion");
+const { text } = require("stream/consumers");
+
 // tailwind.config.js
 module.exports = {
   content: [
@@ -5,6 +8,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
+  
     extend: {}
   },
   plugins: []

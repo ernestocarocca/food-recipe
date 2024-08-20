@@ -9,10 +9,14 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { Button } from "@/components/ui/moving-border";
-import { useEffect } from "react";
+import { use, useEffect } from "react";
 import TypewriterEffectSmoothDemo from "@/components/example/typewriter-effect-demo-1";
+import { useSession, signOut } from "next-auth/react";
+import { redirect } from "next/navigation";
+
 
 export default function Home() {
+
 
 
   async function writeUserData() {
@@ -51,6 +55,11 @@ export default function Home() {
     <main className="flex justify-center border-none  items-center border w-screen ">
  
   <div className="flex items-center">
+  <div className="flex flex-col items-center">
+
+    <button onClick={() => signOut()}> </button>
+   
+  </div>
         <TypewriterEffectSmoothDemo />
   </div>
 
@@ -58,3 +67,4 @@ export default function Home() {
     </main>
   );
 }
+Home.requireAuth = true;

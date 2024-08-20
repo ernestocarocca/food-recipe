@@ -2,12 +2,12 @@
 
 import { useRouter } from "next/navigation";
 import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
-import {  useEffect } from "react";
+import { useEffect } from "react";
 export default function TypewriterEffectSmoothDemo() {
   const router = useRouter();
   const handleRoute = () => {
-  
-    router.push("/pages/signup");
+
+    router.push("/pages/signin");
   }
 
 
@@ -31,7 +31,7 @@ export default function TypewriterEffectSmoothDemo() {
   ];
   return (
     <div className="flex flex-col items-center justify-center h-[40rem]  ">
-      <p className="text-neutral-600 dark:text-neutral-200 text-xs sm:text-base  ">
+      <p className="text-white font-extrabold dark:text-neutral-200 text-xs sm:text-base  ">
         The road to freedom starts from here
       </p>
       <TypewriterEffectSmooth words={words} />
@@ -42,13 +42,11 @@ export default function TypewriterEffectSmoothDemo() {
         <button onClick={() => {
           console.log("clicked")
           handleRoute()
-      
+
 
         }} className="w-40 h-10 rounded-xl bg-white text-black border border-black  text-sm">
-
-              Signup
-           
-        </button>
+          Sign In
+           </button>
       </div>
     </div>
   );
