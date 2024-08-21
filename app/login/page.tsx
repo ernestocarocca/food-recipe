@@ -24,7 +24,7 @@ useEffect(() => {
     console.log('no user');
   }   
 }
-, [ ]);
+, [ router]);
     
 
   return (

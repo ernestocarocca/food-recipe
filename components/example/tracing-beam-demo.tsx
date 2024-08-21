@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { calsans } from "@/fonts/calsans";
+import calsans from "@/styles/calsans.module.css";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { TracingBeam } from "../ui/tracing-beam";

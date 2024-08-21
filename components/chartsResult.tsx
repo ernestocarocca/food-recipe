@@ -16,6 +16,7 @@ import {
     ChartTooltipContent,
 } from "@/components/ui/chart"
 import NumberDisplay from "./number";
+
 const chartData = [{ month: "january", result: 5, total: 30, color: "hsl(var(--white--result))" }];
 const chartConfig = {
     result: {
@@ -44,7 +45,7 @@ export function ChartResult() {
                     <CardDescription>January - december 2024</CardDescription>
                   
                 </CardHeader>
-             
+          
                 <div className=" flex justify-center items-center flex-col mt-10 h-full"> 
                     <h1 className=" flex justify-center items-center font-extrabold mt-10 w-full mb-5">Kilo Kvar</h1>
                     <NumberDisplay number={kiloToGoal} /></div>

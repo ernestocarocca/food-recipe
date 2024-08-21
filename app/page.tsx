@@ -1,9 +1,8 @@
 "use client";
 import BackgroundBeamsDemo from "@/components/example/background-beams-demo";
 import BentoGridDemo from "@/components/example/bento-grid-demo";
-import VortexDemo from "@/components/example/vortex-demo";
-import { BackgroundGradient } from "@/components/ui/background-gradient";
-import { Vortex } from "@/components/ui/vortex";
+
+
 import Image from "next/image";
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";

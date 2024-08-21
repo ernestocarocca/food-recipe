@@ -30,7 +30,7 @@ export default function SignInForm() {
       console.log('no user');
     }
   
-  }, [signOut ]);
+  }, [signOut , router]);
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     try {

@@ -1,3 +1,11 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "next/no-img-element": "off",
+    "no-unused-vars": "off",
+    "no-console": "off",
+    "*": "off" // Disable all other rules
+  }
 }

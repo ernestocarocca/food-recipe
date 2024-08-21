@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/app/firebase.config';
+import SignInForm from './components/signUpForm';
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');
@@ -24,30 +25,8 @@ const SignupPage = () => {
   };
 
   return (
-    <div className=' text-white'>
-      <h1>Signup</h1>
-      <form onSubmit={handleSignup}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-          className='text-black'
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Signup</button>
-      </form>
+<div className=' flex justify-center h-screen'>
+      <div className=' flex items-center'>  < SignInForm /></div>
     </div>
   );
 };

@@ -11,7 +11,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { BackgroundGradientAnimation } from "../ui/background-gradient-animation";
+
 import { ChartResult } from "../chartsResult";
 
 export default function SidebarDemo() {
@@ -25,7 +25,7 @@ export default function SidebarDemo() {
     },
     {
       label: "Profile",
-      href: "#",
+      href: "/UserProfile",
       icon: (
         <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),

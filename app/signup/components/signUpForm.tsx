@@ -31,7 +31,7 @@ export default function SignInForm() {
             console.log('no user');
         }
 
-    }, [signOut]);
+    }, [ router]);
     const handleSignup = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -44,7 +44,7 @@ export default function SignInForm() {
     };
 
     return (
-        <div className="max-w-md w-full  mx-auto rounded-none  md:rounded-2xl p-4 md:p-8 bg-white/20 dark:bg-black/30 backdrop-blur-sm border border-white mt-16 md:mt-0 justify-center items-center">
+        <div className="max-w-md w-full   mx-auto rounded-none  md:rounded-2xl p-4 md:p-8   dark:bg-black/60 backdrop-blur-md  border-white  mt-16 md:mt-0 justify-center items-center">
             <h2 className="font-bold text-xl text-white dark:text-neutral-200">
                 Welcome to DeCope
             </h2>
@@ -77,7 +77,7 @@ export default function SignInForm() {
                     <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:bg-purple-700 focus:ring-offset-2 focus:ring-offset-slate-50">
                         <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
                         <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-                            Logga in
+                          Registrera
                         </span>
                     </button>
                     <BottomGradient />
