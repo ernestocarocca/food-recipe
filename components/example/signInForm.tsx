@@ -35,7 +35,7 @@ export default function SignInForm() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/'); // Redirect to the home page after successful signup
+      router.push('/dashboard'); // Redirect to the home page after successful signup
     } catch (error) {
       console.error('Signup error:', error);
       // Handle signup errors (e.g., display an error message)

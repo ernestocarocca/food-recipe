@@ -20,4 +20,7 @@ const saveUserWeight = async (category: string, subCategory: string, weight: num
     } else {
         console.log('No user is signed in');
     }
-};
+    
+
+}
+export default saveUserWeight;

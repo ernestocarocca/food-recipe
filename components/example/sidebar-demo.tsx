@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
 import {
   IconArrowLeft,
@@ -13,52 +13,122 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 import { ChartResult } from "../chartsResult";
+import { auth, db } from "@/app/firebase.config";
+import { doc, getDoc } from "firebase/firestore";
 
+import { DocumentData } from "firebase/firestore";
+const Dashboard2 = () => {
+  const [userDataFetch, setUserDataFetch] = useState<DocumentData[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const userData = await fetchUserData();
+      if (userData) {
+setUserDataFetch([userData]);
+        console.log("User name:", userData);
+        console.log("User email:", userData.Email);
+      } else {
+        console.log("No user data available.");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const fetchUserData = async () => {
+    const user = auth.currentUser;
+
+    if (user) {
+      try {
+        const docRef = doc(db, 'users', user.uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          console.log('User data:', data);
+
+          // Return the user data
+          return data;
+        } else {
+          console.log('No such document!');
+          return null; // Indicate no data found
+        }
+      } catch (error) {
+        console.error("Error fetching user data: ", error);
+        return null; // Indicate an error occurred
+      }
+    } else {
+      console.log('No user is signed in');
+      return null; // Indicate no user is signed in
+    }
+  };
+
+
+ 
+
+  return (
+   
+    <div>
+  
+  {userDataFetch.map((data, index) => (
+    <div key={index}>
+      <h1 className=" text-white"> namm:{  data.name}</h1>
+      <h2 className="text-white">{data.Email}</h2>
+      
+
+    </div>
+  ))}
+</div>
+
+  );
+};
+  
 export default function SidebarDemo() {
+  const [selectedSection, setSelectedSection] = useState("Dashboard");
+  const [category, setCategory] = useState('weight');
+  const [subCategory, setSubCategory] = useState('juni 2024');
+  const [weight, setWeight] = useState(103);
+
   const links = [
     {
       label: "Dashboard",
       href: "#",
-      icon: (
-        <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
+      icon: <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />,
     },
     {
-      label: "Profile",
-      href: "/UserProfile",
-      icon: (
-        <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
-    },
-    {
-      label: "Settings",
+      label: "UserProfile",
       href: "#",
-      icon: (
-        <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
+      icon: <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />,
+    },
+    {
+      label: "result",
+      href: "#",
+      icon: <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />,
     },
     {
       label: "Logout",
       href: "#",
-      icon: (
-        <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
+      icon: <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />,
     },
   ];
+
   const [open, setOpen] = useState(false);
+
   return (
-    <div
-      className={cn(
-        "rounded-md flex md:flex-row w-full h-screen overflow-hidden"
-      )}
-    >
+    <div className={cn("rounded-md flex md:flex-row w-screen h-screen")}>
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10 h-full">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
             {open ? <Logo /> : <LogoIcon />}
             <div className="mt-8 flex flex-col gap-2">
-              {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
+              {links.map((link) => (
+                <SidebarLink
+                  key={link.label}
+                  link={link}
+                  onClick={() => {
+                    setSelectedSection(link.label);
+                    console.log("Clicked:", link.label);
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -81,7 +151,11 @@ export default function SidebarDemo() {
           </div>
         </SidebarBody>
       </Sidebar>
-  
+      <div className="flex flex-1 h-full">
+        {selectedSection === "Dashboard" && <Dashboard2 />}
+        {selectedSection === "result" && <ChartResult />}
+        {selectedSection === "UserProfile" && <UserProfile />}
+      </div>
     </div>
   );
 }
@@ -115,31 +189,32 @@ export const LogoIcon = () => {
   );
 };
 
-// Dummy dashboard component with content
-const Dashboard = () => {
+
+
+const UserProfile = () => {
   return (
-    <div className="flex flex-1  h-full">
-      <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-transparent  flex flex-col gap-2 flex-1 w-full h-full">
+    <div className="flex  h-full w-screen">
+      <div className="p-2 md:p-10 rounded-tl-2xl border border-neutral-200 dark:border-neutral-700 bg-transparent flex flex-col gap-2 flex-1 w-full h-full">
         <div className="flex gap-2">
-          {[...new Array(4)].map((_, i) => (
-            <div
-              key={"first-array" + i}
-              className="h-20 w-full rounded-lg backdrop-blur-sm border-white border-[1px]"
-            > </div>
-          ))}
+          <div className="h-20 w-full rounded-lg backdrop-blur-sm border-white border-[1px]">
+            <Dashboard2 />
+          </div>
+          <div className="h-20 w-full rounded-lg backdrop-blur-sm border-white border-[1px]">
+            <Dashboard2 />
+          </div>
+          <div className="h-20 w-full rounded-lg backdrop-blur-sm border-white border-[1px]">
+            <Dashboard2 />
+          </div>
         </div>
+        
         <div className="flex gap-2 flex-1">
-          {[...new Array(2)].map((_, i) => (
-            <div
-              key={"second-array" + i}
-              className="h-full w-full rounded-lg backdrop-blur-sm border-white border-[1px]"
-            >
-
-
-            </div>
-          ))}
+          <div className="h-full w-full rounded-lg backdrop-blur-sm border-white border-[1px]"></div>
+          <div className="h-full w-full rounded-lg backdrop-blur-sm border-white border-[1px]"></div>
+          <div className="h-full w-full rounded-lg backdrop-blur-sm border-white border-[1px]"></div>
         </div>
+        
       </div>
     </div>
+    
   );
 };

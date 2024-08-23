@@ -33,14 +33,13 @@ const UserDashboard = () => {
     };
 
     return (
-        <div className=' flex flex-row'>
-            <div className=''>  <SidebarDemo /></div>
-            <div className=' overflow-hidden h-screen '>   <ResultMonth />
-
-
+        <div className=' flex  w-screen overflow-hidden'>
+            <div className=' '>  <SidebarDemo /> 
+          
             </div>
-            <ChartResult />
-            <button onClick={createUserData}> Save to Collection</button>
+        
+         
+          
 
 
         </div>
