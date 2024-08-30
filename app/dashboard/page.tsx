@@ -1,12 +1,11 @@
 "use client";
 
 
-import { ChartResult } from '@/components/chartsResult';
-import SidebarDemo from '@/components/example/sidebar-demo';
-import ResultMonth from '@/components/resultBox/resultMonth';
+
 import React from 'react'
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase.config';
+import { SidebarDemo } from '@/components/example/sidebar-demo';
 
 
 const UserDashboard = () => {
@@ -33,8 +32,8 @@ const UserDashboard = () => {
     };
 
     return (
-        <div className=' flex  w-screen overflow-hidden'>
-            <div className=' '>  <SidebarDemo /> 
+        <div className=' flex  w-screen overflow-hidden '>
+            <div className=' border-none'>  <SidebarDemo /> 
           
             </div>
         

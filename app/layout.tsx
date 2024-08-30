@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Inter as FontSans } from "next/font/google"
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AuthProvider } from "./AuthContext";
 import LogoutButton from "@/components/logoutButton";
 import { ThemeProvider } from 'next-themes';
 import { cn } from "@/lib/utils"
+import { auth, usersCollection } from "./firebase.config";
+import { doc, getDoc } from "firebase/firestore";
 
-
+import { DocumentData } from "firebase/firestore";
 
 // Define or import the RootLayoutProps type
 type RootLayoutProps = {
@@ -28,8 +30,13 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: RootLayoutProps) {
+
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
       <body className={cn(
         "min-h-screen bg-background font-sans antialiased",
         fontSans.variable

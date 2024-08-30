@@ -10,6 +10,12 @@ module.exports = {
     "./node_modules/@nextui-org/theme/dist/components/(select|listbox|divider|popover|button|ripple|spinner|scroll-shadow).js"
   ],
   theme: {
+    screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px"
+    },
     extend: {
       colors: {
         warning: "hsl(var(--warning))",

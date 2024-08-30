@@ -39,16 +39,16 @@ export function ChartResult() {
       const kiloToGoal= chartData[0].total - chartData[0].result
 
         return (
-            <Card className="flex  flex-col w-[20%] h-[10%] bg-transparent m-10">
-                <CardHeader className="items-center pb-0 text-white">
+            <Card className="flex  flex-col w-[90%] h-[50%] bg-transparent m-10 border-none">
+                <CardHeader className="items-center pb-0 text-white font-serif ">
                     <CardTitle>Mål och result</CardTitle>
                     <CardDescription className=" text-white">January - december 2024</CardDescription>
                   
                 </CardHeader>
           
                 <div className=" flex justify-center items-center flex-col mt-10 h-full"> 
-                    <h1 className=" flex justify-center items-center font-extrabold mt-10 w-full mb-5 text-white">Kilo Kvar</h1>
-                    <NumberDisplay number={kiloToGoal} /></div>
+                    <h1 className=" flex justify-center items-center font-extrabold mt-10 w-full  text-white">Kilo Kvar</h1>
+                  </div> 
                 <CardContent className="flex flex-1 items-center pb-10 ">
                     
                     <ChartContainer
@@ -59,7 +59,7 @@ export function ChartResult() {
                         
                         <RadialBarChart
                             data={chartData}
-                            endAngle={180}
+                            endAngle={380}
                             innerRadius={80}
                             outerRadius={130}
                             
