@@ -89,26 +89,11 @@ const [startWeight, setStartWeight] = useState<number>(0);
 
 
     }
-    fetchUserData().then((data) => {
-      console.log('User data:', data);
-
-      if (data) {
-        var goal: UserGoalInterface = data;
-        console.log('User data:', goal);
-        setListOfObject([goal]);
-        console.log("goalDate", goal.date.goalProgress.endGoalDate);
-        const goalData = listOfObject[0]?.date.goalProgress;
-        if (goalData) {
-          setEndGoal(goalData.endGoal.toString());
-          setDescription(goalData.description);
-          setDate(goalData.endGoalDate instanceof Date ? goalData.endGoalDate.getFullYear().toString() : '');
-
-        }
-      }
-    });
+    fetchUserData()
+    
 
   }
-    , [auth.currentUser, description, endGoal]);
+    , [ ]);
 
 
   return (
