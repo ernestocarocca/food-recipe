@@ -32,8 +32,8 @@ const UserDashboard = () => {
     };
 
     return (
-        <div className=' flex  w-screen overflow-hidden '>
-            <div className=' border-none'>  <SidebarDemo /> 
+        <div className=' flex  w-full  h-full  overflow-hidden bg-inherit '>
+            <div className=''>  <SidebarDemo /> 
           
             </div>
         

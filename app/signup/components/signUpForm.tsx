@@ -5,10 +5,11 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { UserName } from '@/app/userprofile/interfaces/userName';
 import { doc, setDoc } from 'firebase/firestore';
 import { UserGoalInterface } from '@/app/userprofile/interfaces/Goals';
-import { TrackGoal } from '@/app/userprofile/interfaces/UserHealthData';
+import { DateInterface, MonthResult, TrackGoal } from '@/app/userprofile/interfaces/UserHealthData';
 import { Label } from '@/components/ui/label';
-import { BottomGradient, LabelInputContainer } from '@/components/example/signInForm';
+
 import { Input } from '@/components/ui/input';
+import { BottomGradient, LabelInputContainer } from '@/app/login/component/signInForm';
 
 
 
@@ -21,6 +22,14 @@ export default function SignUpForm() {
     const [endGoalDate, setEndGoalDate] = useState<Date>( new Date());  
     const [description, setDescription] = useState('');
     const [endGoal, setEndGoal] = useState(0);
+    const [goalWeight, setGoalWeight] = useState(0);
+    const [monthNumber, setMonthNumber] = useState(0);
+    const [loggForMonthInString, setLoggForMonthInString] = useState('');
+    const [lastMothResult, setLastMothResult] = useState(0);
+    const [weight, setWeight] = useState(0);
+    const [discriptionThisMothResult, setDiscriptionThisMothResult] = useState('');
+    const [userGoal, setUserGoal] = useState<UserGoalInterface | null>(null);
+    
     const router = useRouter();
     const user = auth.currentUser;
 
@@ -45,27 +54,39 @@ export default function SignUpForm() {
 
     const createDocInFire = async (user: any) => {
         const userName: UserName = {
-            uid: user.uid,
             firstName: firstName,
             lastName: lastName,
             age: age,
-            email: user.email   
+            email: email,
+            uid: user.uid,
         };
-        const trackGoal: TrackGoal = {
-            endGoalDate: endGoalDate,
+        const dateInterface: DateInterface = {
+            logMothForTheResult: monthNumber,
+            logYearForTheResult: loggForMonthInString,
+        };
+        const monthResult: MonthResult = {
+            lastMothResult: lastMothResult,
+            thisMothResult: weight,
+            descriptionThisMonth: discriptionThisMothResult,
+        }
+
+        const trackgoal: TrackGoal = {
             description: description,
-            endGoal: endGoal,
+            endGoal: goalWeight,
+            endGoalDate: dateInterface,
+            monthResult: monthResult,
         };
-        const userGoal: UserGoalInterface = {
+
+        const userProfile = {
             userName: userName,
             date: {
-                goalProgress: trackGoal,
-            }
+                goalProgress: trackgoal,
+            },
         };
         const userData = {
             Email: user.email,
             uid: user.uid,
-            userGoal: userGoal,
+            userGoal: userProfile,
         };
 
         await setDoc(doc(db, 'users', user.uid), userData);
@@ -73,12 +94,12 @@ export default function SignUpForm() {
     };
 
     return (
-        <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 dark:bg-black/60 backdrop-blur-md border-white mt-16 md:mt-0 justify-center items-center">
+        <div className="mx-auto  w-screen  max-w-sm  rounded-xl border-2 md:rounded-2xl p-6 md:p-8 dark:bg-black/60 backdrop-blur-md border-white md:mt-0 ">
             <h2 className="font-bold text-xl text-white dark:text-neutral-200">
                 Welcome to DeCope
             </h2>
             <form onSubmit={handleSignup}>
-                <LabelInputContainer className="mb-4">
+                <LabelInputContainer className="mb-4  ">
                     <Label className="text-white" htmlFor="email">Email Address</Label>
                     <Input
                         id="email"

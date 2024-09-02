@@ -8,8 +8,7 @@ import { useRouter } from 'next/navigation';
 import { auth, db } from '@/app/firebase.config';
 import SignInForm from './components/signUpForm';
 import { doc, setDoc } from 'firebase/firestore';
-import { UserName } from '../userprofile/interfaces/userName';
-import { TrackGoal } from '../userprofile/interfaces/UserHealthData';
+
 
 const SignupPage = () => {
 
@@ -18,9 +17,17 @@ const SignupPage = () => {
 
 
   return (
-<div className=' flex justify-center h-screen'>
-      <div className=' flex items-center'>  < SignInForm /></div>
-    </div>
+    <div className=' flex justify-center h-screen w-screen   '>
+
+  <div className="flex items-center ">
+    <SignInForm />
+
+      <div>
+        
+        
+      </div>  
+  </div>
+  </div>
   );
 };
 

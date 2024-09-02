@@ -1,20 +1,22 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-const resultFromFireBaseCard = () => {
-    return (
-        <Card className="my-custom-class">
-            <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>This is a description of the card.</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p>This is the content of the card.</p>
-            </CardContent>
-            <CardFooter>
-                <button className="btn">Action</button>
-            </CardFooter>
-        </Card>
-    );
+import BackgroundGradientDemo from "@/components/example/background-gradient-demo";
+import GoalComponent from "./dateGoal";
+import { BackgroundGradient } from "@/components/ui/background-gradient";
+type Props = {
+    children: React.ReactNode;
+    className?: string;
+
 };
+export default function ResultFromFireBaseCard({ children, 
+    className,
+ }: Props) {
 
-export default resultFromFireBaseCard;
+    return (
+        <BackgroundGradient 
+      className="bg-gradient-to-r from-blue-500 to-blue-400"
+        >
+            {children}
+        </BackgroundGradient>
+    );
+
+}

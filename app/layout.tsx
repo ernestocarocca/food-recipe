@@ -7,17 +7,15 @@ import { AuthProvider } from "./AuthContext";
 import LogoutButton from "@/components/logoutButton";
 import { ThemeProvider } from 'next-themes';
 import { cn } from "@/lib/utils"
-import { auth, usersCollection } from "./firebase.config";
-import { doc, getDoc } from "firebase/firestore";
+import OverlayButton from "@/components/logoutButton";
 
-import { DocumentData } from "firebase/firestore";
+
 
 // Define or import the RootLayoutProps type
 type RootLayoutProps = {
   children: React.ReactNode;
 };
 
-const inter = Inter({ subsets: ["latin"] });
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -43,22 +41,18 @@ export default function RootLayout({
       )}
       >
         
+        
         <AuthProvider>
-          
+      
           <main>
-            <ThemeProvider
-              attribute="class"
-              enableSystem={true}
-              defaultTheme="system"
-              storageKey="theme"
-            >
-            <div className="fixed top-2 right-2 z-50 text-white">
-              <LogoutButton />
-            </div>
-           
+      
+      <div className="flex justify-center border-none  items-center border w-screen ">
 
-            {children}
-            </ThemeProvider>
+      
+              <OverlayButton />
+              {children}
+              </div>
+      
           </main>
         </AuthProvider>
       </body>

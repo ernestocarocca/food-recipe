@@ -1,7 +1,7 @@
-"use client";
+
 import React, { useEffect, useState } from "react";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+import { Label } from "../../../components/ui/label";
+import { Input } from "../../../components/ui/input";
 import { cn } from "@/lib/utils";
 
 import {
@@ -21,16 +21,6 @@ export default function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
-  
-  useEffect(() => {
-    if (auth.currentUser) {
-      router.push('/dashboard');
-    }
-    else {
-      console.log('no user');
-    }
-  
-  }, [signOut , router]);
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -42,8 +32,10 @@ export default function SignInForm() {
     }
   };
 
+
+
   return (
-    <div className="max-w-md w-full  mx-auto rounded-none  md:rounded-2xl p-4 md:p-8 bg-white/20 dark:bg-black/30 backdrop-blur-sm border border-white mt-16 md:mt-0 justify-center items-center">
+    <div className="max-w-md w-full  mx-auto rounded-xl md:rounded-2xl p-4 md:p-8 bg-white/20 dark:bg-black/30 backdrop-blur-sm border border-white mt-16 md:mt-0 justify-center items-center">
       <h2 className="font-bold text-xl text-white dark:text-neutral-200">
         Welcome to DeCope
       </h2>

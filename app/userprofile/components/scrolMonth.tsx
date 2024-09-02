@@ -6,7 +6,7 @@ interface ScrollMonthProps {
 }
 
 const ScrollMonth: React.FC<ScrollMonthProps> = ({ onMonthSelect }) => {
-    useEffect(() => {}, [onMonthSelect]);
+    useEffect(() => { }, [onMonthSelect]);
 
     const handleSelectChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
         onMonthSelect(event);
@@ -16,11 +16,15 @@ const ScrollMonth: React.FC<ScrollMonthProps> = ({ onMonthSelect }) => {
         <Select
             label="Månader"
             placeholder="Välj månad"
-            className="max-w-xs bg-transparent"
-            color="default"
+            size="lg"
+            color="success"
+          
+
+
+
             onChange={handleSelectChange}
         >
-            <SelectSection>
+            <SelectSection className="  ">
                 <SelectItem key="January" value="January">January</SelectItem>
                 <SelectItem key="February" value="February">February</SelectItem>
                 <SelectItem key="March" value="March">March</SelectItem>
