@@ -4,7 +4,9 @@ import { auth } from "@/app/firebase.config";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import {  useEffect, useState } from "react";
-import SignInForm from "@/components/example/signInForm";
+import { SignInForm } from "./component/signInForm";
+import HandleSignUp from "./component/handleSignUp";
+
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -28,9 +30,12 @@ useEffect(() => {
     
 
   return (
-   <div className=" flex  justify-center    h-screen "> 
+    <div className=" flex  justify-center  w-screen  h-screen background-class "> 
     <div className=" flex items-center">
-        <SignInForm />
+
+       <HandleSignUp>
+         <SignInForm />
+       </HandleSignUp>
     </div>
    </div>
   );

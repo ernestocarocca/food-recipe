@@ -1,12 +1,11 @@
 "use client";
 
 
-import { ChartResult } from '@/components/chartsResult';
-import SidebarDemo from '@/components/example/sidebar-demo';
-import ResultMonth from '@/components/resultBox/resultMonth';
+
 import React from 'react'
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase.config';
+import { SidebarDemo } from '@/components/example/sidebar-demo';
 
 
 const UserDashboard = () => {
@@ -33,14 +32,13 @@ const UserDashboard = () => {
     };
 
     return (
-        <div className=' flex flex-row'>
-            <div className=''>  <SidebarDemo /></div>
-            <div className=' overflow-hidden h-screen '>   <ResultMonth />
-
-
+        <div className=' flex  w-full  h-full  overflow-hidden bg-inherit '>
+            <div className=''>  <SidebarDemo /> 
+          
             </div>
-            <ChartResult />
-            <button onClick={createUserData}> Save to Collection</button>
+        
+         
+          
 
 
         </div>
