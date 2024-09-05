@@ -7,7 +7,6 @@ export interface TrackGoal {
 }
 export  interface DateInterface {
 logMothForTheResult: number;
-
 logYearForTheResult: string;
 }
 

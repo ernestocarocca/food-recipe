@@ -14,7 +14,8 @@ import { UserName } from "@/app/userprofile/interfaces/userName";
 
 import { BackgroundGradient } from "../ui/background-gradient";
 import { Button } from "../ui/button";
-import { DateInterface, MonthResult, TrackGoal } from "@/app/userprofile/interfaces/UserHealthData";
+import { DateInterface, MonthResult, TrackGoal } from "@/app/userprofile/interfaces/MothResults";
+
 
 
 const db = getFirestore();
@@ -51,12 +52,12 @@ const year = selectedYear.getFullYear();
   const [monthGoal, setMonthGoal] = useState("");
   const user = auth.currentUser;
 
-  const handleStartWeight = (startWeight: string) => {
+  const handleStartGoal = (startWeight: string) => {
     setStarGoal(startWeight);
     console.log("startWeight:" + startWeight);
   };
 
-  const handleGoalWeight = (goalWeight: number) => {
+  const handleEndGoal = (goalWeight: number) => {
     setEndGoal(goalWeight);
     console.log("goalWeight:" + goalWeight);
   };
@@ -92,9 +93,9 @@ const year = selectedYear.getFullYear();
         logYearForTheResult: loggForMonthInString,
       };
       const monthResult: MonthResult = {
-        lastMothResult: lastMothResult,
-        thisMothResult: weight,
-        descriptionThisMonth: discriptionThisMothResult,
+        lastMothResult:  lastMothResult,
+        thisMothResult: thisMothResult, 
+        descriptionThisMonth: discriptionThisMothResult
       }
     
            const trackgoal: TrackGoal = {
@@ -167,13 +168,13 @@ const year = selectedYear.getFullYear();
             <LabelInputContainer>
               <Label className="text-white opacity-75" htmlFor="startWeight">Nuvarande vikt</Label>
               <BackgroundGradient>
-                <Input className="opacity-75" onChange={(e) => handleStartWeight(e.target.value)} id="startWeight" placeholder="Startvikt" type="text" />
+                <Input className="opacity-75" onChange={(e) => handleStartGoal(e.target.value)} id="startWeight" placeholder="Startvikt" type="text" />
               </BackgroundGradient>
             </LabelInputContainer>
             <LabelInputContainer>
               <Label className="text-white opacity-75" htmlFor="goalWeight">Målvikt</Label>
               <BackgroundGradient>
-                <Input className="opacity-75" onChange={(e) => handleGoalWeight(Number(e.target.value))} id="goalWeight" placeholder="Målvikt" type="number" />
+                <Input className="opacity-75" onChange={(e) => handleEndGoal(Number(e.target.value))} id="goalWeight" placeholder="Målvikt" type="number" />
               </BackgroundGradient>
             </LabelInputContainer>
           </div>
@@ -196,7 +197,7 @@ const year = selectedYear.getFullYear();
             <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
               <LabelInputContainer>
                 <Label className="text-white " htmlFor="firstname">Nuvarande vikt</Label>
-                <Input className=" opacity-85" onChange={() => handleStartWeight} id="firstname" placeholder="Ingånde resultat" type="text" />
+                <Input className=" opacity-85" onChange={() => handleStartGoal} id="firstname" placeholder="Ingånde resultat" type="text" />
               </LabelInputContainer>
               <LabelInputContainer>
                 <Label className="text-white" htmlFor="lastname">Målvikt</Label>

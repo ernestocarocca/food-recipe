@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { browserLocalPersistence, getAuth, setPersistence } from "firebase/auth";
 import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -13,6 +13,9 @@ const firebaseConfig = {
 };
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const auth = getAuth();
+setPersistence(auth, browserLocalPersistence).catch((error) => {
+    console.error("Error setting persistence:", error);
+});
 const db = getFirestore(app);
 const usersCollection = collection(db, 'users');
 

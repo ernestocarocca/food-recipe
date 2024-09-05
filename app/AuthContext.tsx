@@ -1,6 +1,8 @@
 
+
+
 'use client';
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "./firebase.config";
 import { useRouter } from "next/navigation";
@@ -10,20 +12,24 @@ interface User {
     email: string | null;
     displayName: string | null;
     photoURL: string | null;
+    loggedIn: boolean;
 }
 
-interface AuthContextType {
+export interface AuthContextType {
+
     user: User;
     loading: boolean;
-    signInWithEmailAndPassword: (email: string, password: string) => Promise<void>;
-    signOut: () => Promise<void>;
+   
+
+    
 }
 
 const AuthContext = createContext<AuthContextType>({
-    user: { uid: null, email: null, displayName: null, photoURL: null },
+
+    user: { uid: null, email: null, displayName: null, photoURL: null , loggedIn: false},
     loading: true,
-    signInWithEmailAndPassword: () => Promise.resolve(),
-    signOut: () => Promise.resolve(),
+   
+
 });
 
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -32,6 +38,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
         email: null,
         displayName: null,
         photoURL: null,
+        loggedIn: false, 
     });
     const [loading, setLoading] = useState(true);
 
@@ -43,6 +50,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                     email: user.email,
                     displayName: user.displayName,
                     photoURL: user.photoURL,
+
+                    loggedIn: true,
+
                 });
             } else {
                 setUser({
@@ -50,6 +60,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                     email: null,
                     displayName: null,
                     photoURL: null,
+                    loggedIn: false,
                 });
 
             }
@@ -59,16 +70,16 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
         return () => unsubscribe();
     }, []);
 
-    const signInWithEmailAndPassword = async (email: string, password: string) => {
+    const signInUser = async (email: string, password: string) => {
         try {
-            await signInWithEmailAndPassword(email, password);
+            await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
             console.error('Error signing in:', error);
         }
     };
     const router = useRouter();
     const signOutUser = async () => {
-      
+
         try {
             await auth.signOut();
             router.push('/');
@@ -78,12 +89,12 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     };
 
     return (
-        <AuthContext.Provider
-            value={{ user, loading, signInWithEmailAndPassword, signOut: signOutUser }}
-        >
-            {children}
-        </AuthContext.Provider>
-    );
+            <AuthContext.Provider
+                value={{ user, loading }}
+            >
+                {children}
+            </AuthContext.Provider>
+        );
 };
 
 export { AuthContext, AuthProvider, signOut };

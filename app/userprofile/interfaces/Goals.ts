@@ -1,5 +1,5 @@
 
-import { TrackGoal } from "./UserHealthData";
+import { TrackGoal } from "./MothResults";
 import { UserName } from "./userName";
 
 

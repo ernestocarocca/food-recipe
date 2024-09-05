@@ -1,12 +1,4 @@
 "use client";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
 
 import React, { useEffect, useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "../ui/sidebar";
@@ -26,19 +18,20 @@ import SignupFormDemo from "./signup-form-demo";
 import { auth, db } from "@/app/firebase.config";
 import { doc, DocumentData, getDoc } from "firebase/firestore";
 import { UserGoalInterface } from "@/app/userprofile/interfaces/Goals";
-import { TrackGoal } from "@/app/userprofile/interfaces/UserHealthData";
+
 
 import BackgroundGradientDemo from "./background-gradient-demo";
 import { Result } from "postcss";
 import ResultFromFireBaseCard from "@/app/dashboard/components/card";
 import GoalComponent from "@/app/dashboard/components/dateGoal";
 import FrostedGlassComponent from "@/app/dashboard/components/frostGlasBackGeound";
+import { Divider, Skeleton } from "@nextui-org/react";
 
 
 
 
 const Dashboard2 = () => {
-
+const[loading, setLoading] = useState(true)
   const [userData, setUserData] = useState<DocumentData | null>(null);
   const [listOfObject, setListOfObject] = useState<UserGoalInterface[]>([]) // Adjusted to an array of UserGoalInterface
   const [age, setAge] = useState<number>(0);
@@ -54,8 +47,10 @@ const [startWeight, setStartWeight] = useState<number>(0);
 
 
   useEffect(() => {
-
+    
+    
     const fetchUserData = async () => {
+      setLoading(true)
       const user = auth.currentUser;
 
       if (user) {
@@ -85,30 +80,38 @@ const [startWeight, setStartWeight] = useState<number>(0);
       } else {
         console.log('No user is signed in');
         return null; // Indicate no user is signed in
-      }
+      } 
+
 
 
     }
-    fetchUserData()
+    fetchUserData().then(() => {
+      setLoading(false);
+
+
     
 
+    } 
+    );  
   }
-    , [ ]);
-
+  , []);
 
   return (
     
+  <div className={'flex flex-col space-y-3'}>
+    <Skeleton  />
       <div className=" flex justify-center items-center w-full h-screen">
         <div className="relative w-full h-full flex items-center justify-center">
           <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-          <div className="relative z-10 p-8 bg-white/10 backdrop-blur-md rounded-xl shadow-lg w-11/12 max-w-4xl border-white border-2">
-            {listOfObject.map((goal, index) => (
+          <div className="relative z-10 p-8 bg-white/30 backdrop-blur-md rounded-xl shadow-lg w-11/12 max-w-4xl border-white border-2">
+            {loading ? (<h1>Loading....</h1>) : (listOfObject.map((goal, index) => (
               <div key={index} className="text-center p-8 space-y-6">
                 <h1 className="text-blue-950 font-serif font-extrabold text-5xl tracking-wide">
                   RESULTAT
                 </h1>
                 <h1 className="font-extrabold text-green-600">
                   DATUM: {goal.date.goalProgress.endGoalDate.logYearForTheResult}
+
                 </h1>
                 <h1 className="text-teal-400 text-4xl font-semibold">
                   Namn: <span>{goal.userName.firstName}</span>
@@ -116,20 +119,33 @@ const [startWeight, setStartWeight] = useState<number>(0);
                 <h2 className="text-gray-400 text-2xl">
                   Age: <span>{goal.userName.age}</span>
                 </h2>
-                <h2 className="text-blue-950 text-xl">
+                <h2 className="text-white text-xl">
                   Description: <span>{goal.date.goalProgress.description}</span>
                 </h2>
-                <h2 className="text-blue-950 text-xl">
+                <h2 className="text-white text-xl">
                   Weight: <span>{goal.date.goalProgress.endGoal}</span>
                 </h2>
-                <h2 className="text-blue-950 text-xl">
+
+                <h2 className="text-white text-xl">
                   EndGoal: <span>{goal.date.goalProgress.endGoal}</span>
                 </h2>
+                <Divider className="bg-white" />
+                <h1 className="text-white text-xl">
+                  MÅNADS RESULTAT
+                </h1>
+                <h2>
+                  Föregåendemånad: <span>{goal.date.goalProgress.monthResult.lastMothResult}</span>
+                </h2>
+
+
+
               </div>
-            ))}
+            )))}
           </div>
         </div>
       </div>
+
+  </div>
 
   );
 }

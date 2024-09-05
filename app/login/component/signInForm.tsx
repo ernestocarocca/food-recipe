@@ -1,18 +1,18 @@
 
-import React, { useEffect, useState } from "react";
+import React, { use, useContext, useEffect, useState } from "react";
 import { Label } from "../../../components/ui/label";
 import { Input } from "../../../components/ui/input";
 import { cn } from "@/lib/utils";
+import { Button } from "../../../components/ui/button";
 
-import {
 
-  IconBrandGoogle,
-  IconBrandOnlyfans,
-} from "@tabler/icons-react";
+
 
 import { useRouter } from "next/navigation";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "@/app/firebase.config";
+import { CircularProgress } from "@nextui-org/progress";
+import { AuthContext, AuthContextType } from "@/app/AuthContext";
 
 
 
@@ -20,15 +20,46 @@ import { auth } from "@/app/firebase.config";
 export default function SignInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const user = useContext(AuthContext);
+  
   const handleSignup = async (e: React.FormEvent) => {
+    const [ lUser, setLuser] = useState<AuthContextType>();    
+    const getFirebaseUser = auth.currentUser;
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await  signInWithEmailAndPassword(auth, email, password);
+      const localUser: AuthContextType = 
+        {
+          user: {
+            uid: getFirebaseUser?.uid || null,
+            email: getFirebaseUser?.email || null,
+            displayName:  getFirebaseUser?.displayName  || null,
+            photoURL: getFirebaseUser?.photoURL || null,
+            loggedIn: true,
+          },
+          loading: false,
+        
+        }
+      setLuser(localUser);
+        
+
+
+      
+
+
+
+
+
+
+
+
       router.push('/dashboard'); // Redirect to the home page after successful signup
     } catch (error) {
+
       console.error('Signup error:', error);
-      // Handle signup errors (e.g., display an error message)
+<h1>Rong username or password</h1>
     }
   };
 
@@ -61,16 +92,17 @@ export default function SignInForm() {
 
         <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
       <div>
-        <h1 className=" text-green-600 px-4 font-bold">Användare: {auth.currentUser?.email}
-        </h1>
+     
       </div>
         <div className="flex flex-col space-y-4">
-          <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:bg-purple-700 focus:ring-offset-2 focus:ring-offset-slate-50">
+          <Button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:bg-purple-700 focus:ring-offset-2 focus:ring-offset-slate-50">
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
             <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
-           Logga in
+            
+              {isLoading ? <CircularProgress aria-label="Loading..." /> : "Logga in"}
+              
             </span>
-          </button>
+          </Button>
           <BottomGradient />
           {/* <button onClick={() => signOut()} className="text-white">logout</button> */}
         </div>
