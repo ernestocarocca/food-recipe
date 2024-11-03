@@ -1,11 +1,12 @@
+
 import type { Metadata } from "next";
 
 import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
-import React from "react";
 import { ThemeProvider } from 'next-themes';
-import { cn } from "@/lib/utils";
-import { AuthProvider } from "./AuthContext";
+
+
+
 
 
 type RootLayoutProps = {
@@ -23,7 +24,10 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
-  return (
+
+  function cn(...classes: (string | undefined)[]): string {
+    return classes.filter(Boolean).join(' ');
+  } return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,17 +38,12 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
           fontSans.variable
         )}
       >
-        const user = useContext(AuthContext);
-        <AuthProvider  >
 
-        <main >
-        
-            <ThemeProvider attribute="class" defaultTheme="light">
-              {children}
-            </ThemeProvider>
-     
-        </main>
-        </AuthProvider>
+
+   <main >
+ {children}
+    </main>
+
       </body>
     </html>
   );
